@@ -154,9 +154,8 @@ if __name__ == "__main__":
     )
 
         logger.debug(f"Restraints: {restraints}")
-        selection_string = "property is_perturbable and atomidx 22,23,24,25,26,46,47"
+        selection_string = None
 
-        # morph 2
         lambda_values = [
             0.00,
             0.05,
@@ -182,9 +181,6 @@ if __name__ == "__main__":
             0.95,
             1.00,
         ]
-
-
-        basename_modifier = None
     else:
         logger.info("No restraints defined for this system")
         raise NotImplementedError
@@ -207,19 +203,10 @@ if __name__ == "__main__":
         else:
             ghost_mods_name = "no_ghosts"
 
-        if basename_modifier == None:
-            basename_modifier = ""
-        else:
-            basename_modifier = f"{basename_modifier}"
 
-        basename = f"{system_name}_{ghost_mods_name}_morse_ring_break_stage_{restraints_strength}_de_{int(k)}_k_morse_potential_restr_{basename_modifier}_repl_{repl}"
+        basename = f"{system_name}_{ghost_mods_name}_repl_{repl}"
 
-        if hrex:
-            work_dir = f"dynamics_hrex/{basename}"
-            if rest2:
-                work_dir = f"dynamics_rest2/{basename}"
-        else:
-            work_dir = f"dynamics_std/{basename}"
+        work_dir = f"dynamics/{basename}"
 
         # check if work_dir exists, if not create it
         if not os.path.exists(work_dir):
@@ -254,30 +241,24 @@ if __name__ == "__main__":
         else:
             config.runtime = run_time
 
-        config.lambda_schedule = f"morse_ring_break_morph_2"
+        config.lambda_schedule = "ring_break_morph"
 
         config.equilibration_time = equil_time
         config.equilibration_timestep = equib_timestep
         config.equilibration_constraints = True
-        config.multi_conformational_seeding = False
         config.energy_frequency = "1ps"
-        # config.frame_frequency = "20ps"
-        config.frame_frequency = "100ps"
+        config.frame_frequency = "20ps"
         config.checkpoint_frequency = "100ps"
         config.save_energy_components = True
         config.restraints = restraints
         config.timeout = "30 s"
         config.lambda_values = lambda_values
-        config.lambda_energy = lambda_values
 
         if ghost_mods:
             config.ghost_modifications = True
         else:
             config.ghost_modifications = False
         config.output_directory = work_dir
-
-        if focused_sampling:
-            config.focused_sampling_lambda_range = [0.7, 1.0]
 
         if hrex:
             config.replica_exchange = True
@@ -292,11 +273,3 @@ if __name__ == "__main__":
             runner = sd.runner.Runner(config=config, system=sire_system)
 
         runner.run()
-
-        try:
-            logger.info("Copying topology files")
-            copy2(f"{work_dir}/system0.prm7", f"{work_dir}/system0.parm7")
-            copy2(f"{work_dir}/system1.prm7", f"{work_dir}/system1.parm7")
-        except FileNotFoundError:
-            logger.info("Could not find the topology files to copy")
-            pass
