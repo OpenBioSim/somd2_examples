@@ -13,3 +13,6 @@ cd single_schedule_example
 
 For Auxiliary restraints calculation, uncomment the relevant part of the [slurm script](single_schedule_example/slurm_run_somd2.sh) and run same as above.
 Experimentally determined $\Delta \Delta G$ for this transformation is: -0.51 kcal/mol.
+
+Bound leg dG (triplicate): -33.83 +/- 0.10
+Free leg dG (triplicate): -33.76 +/- 0.01
