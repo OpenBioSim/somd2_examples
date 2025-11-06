@@ -231,7 +231,7 @@ if __name__ == "__main__":
         config.cutoff = "12A"
         config.cutoff_type = "PME"
         config.timestep = dt
-        config.num_energy_neighbours = 2
+        # config.num_energy_neighbours = 2
         if restart:
             config.restart = True
             if extend_time is not None:
