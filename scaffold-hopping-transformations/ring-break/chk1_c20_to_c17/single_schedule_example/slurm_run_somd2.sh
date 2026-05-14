@@ -10,7 +10,7 @@ leg=$1
 replicate=$2
 
 # calc params
-prod_time=500
+prod_time=5000
 equib_time=250
 restraints_strength=50
 system_name=chk1_compound_20_to_17_"$leg"
