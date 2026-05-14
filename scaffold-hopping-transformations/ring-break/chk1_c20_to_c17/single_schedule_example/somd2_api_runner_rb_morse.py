@@ -32,18 +32,6 @@ def get_user_input():
         action="store_true",
         help="Whether to run a Hamiltonian replica exchange simulation",
     )
-    parser.add_argument(
-        "--use_rest2",
-        action="store_true",
-        help="Whether to run a REST2 simulation",
-    )
-
-    parser.add_argument(
-        "--bond_strength",
-        type=float,
-        required=True,
-        help="Bond strength for the restraints",
-    )
 
     parser.add_argument(
         "--restart",
@@ -64,18 +52,6 @@ def get_user_input():
         help="Whether to use ghosts atom modifications in the simulation",
     )
 
-    parser.add_argument(
-        "--rest2_scale",
-        type=int,
-        required=False,
-        help="REST2 scaling factor",
-    )
-    parser.add_argument(
-        "--focused_sampling",
-        action="store_true",
-        help="Whether to use focused sampling in the simulation",
-    )
-
     args = parser.parse_args()
     return (
         args.equib_time,
@@ -84,13 +60,9 @@ def get_user_input():
         args.system_name,
         args.replicate,
         args.use_hrex,
-        args.use_rest2,
-        args.bond_strength,
         args.restart,
         args.extend_time,
         args.ghost_mods,
-        args.rest2_scale,
-        args.focused_sampling,
     )
 
 
@@ -102,13 +74,9 @@ if __name__ == "__main__":
         system_name,
         repl,
         hrex,
-        rest2,
-        k,
         restart,
         extend_time,
         ghost_mods,
-        rest2_scale,
-        focused_sampling,
     ) = get_user_input()
     logger.info(f"Equilibration Time: {equib_time} picoseconds")
     logger.info(f"Production Time: {prod_time} picoseconds")
@@ -116,13 +84,9 @@ if __name__ == "__main__":
     logger.info(f"System Name: {system_name}")
     logger.info(f"Replicate: {repl}")
     logger.info(f"Hamiltonian Replica Exchange: {hrex}")
-    logger.info(f"REST2: {rest2}")
-    logger.info(f"Bond Strength: {k}")
     logger.info(f"Restart: {restart}")
     logger.info(f"Extend Time: {extend_time}")
     logger.info(f"Ghost Modifications: {ghost_mods}")
-    logger.info(f"REST2 Scaling Factor: {rest2}")
-    logger.info(f"Focused Sampling: {focused_sampling}")
 
     if extend_time is not None:
         if restart is False:
@@ -137,20 +101,32 @@ if __name__ == "__main__":
         )
 
 
-    if not rest2_scale:
-        rest2_scale = 1
-
     sire_system = sr.stream.load(f"../prepared_rbfe_input_files/{system_name}.bss")
     ref_system = sire_system.clone()
     ref_system = sr.morph.link_to_reference(ref_system)
 
 
     if "chk1_compound_20_to_17" in system_name:
-        restraints = sr.restraints.morse_potential(
+        hard_restraints, sire_system = sr.restraints.morse_potential(
         sire_system,
-        k=f"{k} kcal mol-1 A-2",
-        de=f"{restraints_strength} kcal mol-1",
+        de="150 kcal mol-1",
         auto_parametrise=True,
+        direct_morse_replacement=True,
+        name="morse_hard"
+    )
+    print(hard_restraints)
+
+
+    soft_restraints, _ = sr.restraints.morse_potential(
+        sire_system,
+        atoms0=hard_restraints[0].atom0(),
+        atoms1=hard_restraints[0].atom1(),
+        r0=hard_restraints[0].r0(),
+        k=f"125 kcal mol-1 A-2",
+        auto_parametrise=False,
+        direct_morse_replacement=False,
+        de=f"{restraints_strength} kcal mol-1",
+        name="morse_soft",
     )
 
         logger.debug(f"Restraints: {restraints}")
@@ -250,7 +226,7 @@ if __name__ == "__main__":
         config.frame_frequency = "20ps"
         config.checkpoint_frequency = "100ps"
         config.save_energy_components = True
-        config.restraints = restraints
+        config.restraints = [hard_restraints, soft_restraints]
         config.timeout = "30 s"
         config.lambda_values = lambda_values
 
@@ -262,11 +238,6 @@ if __name__ == "__main__":
 
         if hrex:
             config.replica_exchange = True
-            config.oversubscription_factor = 1
-
-            if rest2:
-                config.rest2_scale = rest2_scale
-                config.rest2_selection = selection_string
 
             runner = sd.runner.RepexRunner(config=config, system=sire_system)
         else:
