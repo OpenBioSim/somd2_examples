@@ -22,7 +22,7 @@ Use this table to find the exact tutorial or example system that matches the che
 | **Covalent RBFE** | hCatL | [`03-advanced-transformations/hCatL-covalent`](./03-advanced-transformations/hCatL-covalent) | 🟡
 | **Protein Sidechain Mutation** | MDM2 | [`03-advanced-transformations/mdm2-v14g-protein-mutation`](./03-advanced-transformations/mdm2-v14g-protein-mutation) | 🟡
 | **Scaffold Hopping (Ring-Break)** | CHK1 | [`03-advanced-transformations/chk1-ring-break-only`](./03-advanced-transformations/chk1-ring-break-only) | 🟡
-| **Charge-Changing Mutation** | MDM2 | [`04-case-studies/mdm2-e23g-mutation`](./04-case-studies/mdm2-e23g-mutation) | 🔴
+| **Charge-Changing Mutation** | MDM2 | [`04-case-studies/mdm2-e23g-mutation`](./04-case-studies/mdm2-e23g-mutation) | 🟢
 | **Proline Mutation** | OMTKY3 | [`04-case-studies/OMTKY3-proline-mutation`](./04-case-studies/OMTKY3-proline-mutation) | 🔴
 
 ---
@@ -37,10 +37,10 @@ Inside a tutorial directory, you will find:
 Contains the initial structural files (e.g., raw `.pdb`, `.sdf`, `.mol2` files) and the Python scripts used to prepare the system. 
 
 ### `02_simulation/`
-Dedicated entirely to execution. 
+Shows how to run the SOMD2 simulation for the specific use-case. 
 
 ### `03_analysis/`
-Where the raw simulation results are processed.
+Shows how to process the SOMD2 results generated in the simulation section.
 
 ---
 
