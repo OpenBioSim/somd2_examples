@@ -1,21 +1,49 @@
-# SOMD2 Examples
+# SOMD2 Examples & Tutorials
 
-Collection of [SOMD2](https://github.com/OpenBioSim/somd2/) input files showcasing SOMD2 FEP capabilities.
+A collection of [SOMD2](https://github.com/OpenBioSim/somd2/) input files and end-to-end tutorials showcasing the capabilities of SOMD2. 
 
-Examples
-========
+This repository is organized by **progression and complexity**. If you are looking for a specific type of transformation (e.g., charge-changing, ring-breaking, or covalent bonding), please refer to the **Directory Table** below.
 
-## Full Tutorials
-Full tutorials aim to detail the end-to-end process of an example of SOMD2 transformation run. This covers:
-1. Generation of perturbable systems from raw inputs (pdb, sdf files for example).
-2. Specific run SOMD2 run procedures.
-3. Result analysis.
+---
 
-* [`scaffold-hopping-transformations`](ligand-rbfe/scaffold-hopping-transformations/ring-break/chk1_c20_to_c17) - Example of a ligand RBFE scaffold-hopping transformation
+## Directory Table
 
-## Example Perturbable SOMD2 Systems
-Example perturbable systems do not contain setup details or SOMD2 run procedures, these are just SOMD2 binary `.bss` meant for rapid distribution and testing of advanced use cases, such as covalent mutations or testing of charge-changing transformations.
-* [`noncovalent-rbfe`](ligand-rbfe/tyk2) - Standard RBFE calculation for TYK2.
-* [`sidechain-mutations`](protein-fep/non-covalent-rbfe/mdm2/v14g) - Mutation between two canonical amino acid sidechains for MDM2.
-* [`covalent-rbfe`](protein-fep/covalent-rbfe/hCatL) - RBFE calculation between two covalently bound ligands for hCatL.
-* [`sodium-in-a-box`](sodium-in-a-box) - Sodium charge changing (Na+ --> Na°) calculation.
+Use this table to find the exact tutorial or example system that matches the chemical transformation you want to run.
+
+**Status Legend:**
+* 🟢 **Full Tutorial** (End-to-End: `01_setup`, `02_simulation`, `03_analysis`)
+* 🟡 **System Only** (Ready-to-run `.bss` file provided, no analysis scripts)
+* 🔴 **WIP** (Work in Progress)
+
+| Transformation Concept | Target System | Directory Path | Status
+| :--- | :--- | :--- |
+| **Basic Charge-Change (Validation)** | Sodium (Na+ → Na°) | [`01-basics/sodium-in-a-box`](./01-basics/sodium-in-a-box) | 🟡
+| **Standard Ligand RBFE** | TYK2 | [`02-standard-rbfe/tyk2-ejm31-to-ejm50`](./02-standard-rbfe/tyk2-ejm31-to-ejm50) | 🟡
+| **Covalent RBFE** | hCatL | [`03-advanced-transformations/hCatL-covalent`](./03-advanced-transformations/hCatL-covalent) | 🟡
+| **Protein Sidechain Mutation** | MDM2 | [`03-advanced-transformations/mdm2-v14g-protein-mutation`](./03-advanced-transformations/mdm2-v14g-protein-mutation) | 🟡
+| **Scaffold Hopping (Ring-Break)** | CHK1 | [`03-advanced-transformations/chk1-ring-break-only`](./03-advanced-transformations/chk1-ring-break-only) | 🟡
+| **Charge-Changing Mutation** | MDM2 | [`04-case-studies/mdm2-e23g-protein-mutation`](./04-case-studies/mdm2-e23g-protein-mutation) | 🔴
+| **Proline Mutation** | OMTKY3 | [`04-case-studies/OMTKY3-ring-break-charge-change`](./04-case-studies/OMTKY3-ring-break-charge-change) | 🔴
+
+---
+
+## Internal Folder Structure
+
+To keep workflows reproducible and clean, every full tutorial in this repository will aim to adhere to a three-phase internal folder structure. This separates system preparation, simulation execution, and data analysis.
+
+Inside a tutorial directory, you will find:
+
+### `01_setup/`
+Contains the initial structural files (e.g., raw `.pdb`, `.sdf`, `.mol2` files) and the Python scripts used to prepare the system. 
+
+### `02_simulation/`
+Dedicated entirely to execution. 
+
+### `03_analysis/`
+Where the raw simulation results are processed.
+
+---
+
+## Dependencies
+
+Running these examples end-to-end requires the `devel` versions of OpenBioSim software stack (see https://github.com/OpenBioSim/somd2#installation for details). Check individual tutorial `README` files for specific version requirements:
