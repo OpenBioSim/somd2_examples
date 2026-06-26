@@ -22,8 +22,8 @@ Use this table to find the exact tutorial or example system that matches the che
 | **Covalent RBFE** | hCatL | [`03-advanced-transformations/hCatL-covalent`](./03-advanced-transformations/hCatL-covalent) | 🟡
 | **Protein Sidechain Mutation** | MDM2 | [`03-advanced-transformations/mdm2-v14g-protein-mutation`](./03-advanced-transformations/mdm2-v14g-protein-mutation) | 🟡
 | **Scaffold Hopping (Ring-Break)** | CHK1 | [`03-advanced-transformations/chk1-ring-break-only`](./03-advanced-transformations/chk1-ring-break-only) | 🟡
-| **Charge-Changing Mutation** | MDM2 | [`04-case-studies/mdm2-e23g-protein-mutation`](./04-case-studies/mdm2-e23g-protein-mutation) | 🔴
-| **Proline Mutation** | OMTKY3 | [`04-case-studies/OMTKY3-ring-break-charge-change`](./04-case-studies/OMTKY3-ring-break-charge-change) | 🔴
+| **Charge-Changing Mutation** | MDM2 | [`04-case-studies/mdm2-e23g-mutation`](./04-case-studies/mdm2-e23g-mutation) | 🔴
+| **Proline Mutation** | OMTKY3 | [`04-case-studies/OMTKY3-proline-mutation`](./04-case-studies/OMTKY3-proline-mutation) | 🔴
 
 ---
 
@@ -46,4 +46,4 @@ Where the raw simulation results are processed.
 
 ## Dependencies
 
-Running these examples end-to-end requires the `devel` versions of OpenBioSim software stack (see https://github.com/OpenBioSim/somd2#installation for details). Check individual tutorial `README` files for specific version requirements:
+Running these examples **requires the devlopment (`devel`) versions** of OpenBioSim software stack (see https://github.com/OpenBioSim/somd2#installation for details). Check individual tutorial `README` files for specific version requirements.

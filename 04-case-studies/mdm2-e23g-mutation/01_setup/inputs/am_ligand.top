@@ -1,0 +1,20 @@
+; am_ligand_GMX.top created by acpype (v: 2022.7.21) on Thu Nov  3 10:41:07 2022
+
+[ defaults ]
+; nbfunc        comb-rule       gen-pairs       fudgeLJ fudgeQQ
+1               2               yes             0.5     0.8333333333
+
+; Include am_ligand_GMX.itp topology
+#include "am_ligand.itp"
+
+; Ligand position restraints
+#ifdef POSRES_LIG
+#include "posre_am_ligand.itp"
+#endif
+
+[ system ]
+ am_ligand
+
+[ molecules ]
+; Compound        nmols
+ am_ligand        1     

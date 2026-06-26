@@ -1,0 +1,28 @@
+checkpoint_frequency: 500 ps
+runtime: 500 ps
+cutoff: 10A
+cutoff_type: pme
+energy_frequency: 1 ps
+equilibration_constraints: true
+equilibration_time: 500 ps
+equilibration_timestep: 0.002 ps
+frame_frequency: 250 ps
+lambda_schedule: standard_morph
+log_file: log.txt
+log_level: debug
+minimisation_constraints: false
+minimisation_errors: false
+minimise: true
+num_energy_neighbours: 5
+num_lambda: 11
+ghost_modifications: false
+output_directory: mdm2_e23g_open_conf_am7209_short_run
+overwrite: false
+pressure: 1 atm
+replica_exchange: true
+save_xml: true
+shift_coulomb: "1 A"
+shift_delta: "1.5 A"
+temperature: 300 K
+timestep: 0.004 ps
+write_config: true
