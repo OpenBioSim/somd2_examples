@@ -7,7 +7,7 @@ Now that we have built a perturbable SOMD2 system file, we have 3 different opti
 > Whatever approach you use to run a SOMD2 simulation, remember to let SOMD2 know what GPU(s) you have available by using `CUDA_VISIBLE_DEVICES` environment variable.
 > E.g `export CUDA_VISIBLE_DEVICES=0,1,2,3` in a quad-GPU setup. This isn't necessary when using SLURM as it will normally do this automatically for you.
 
-In this tutorial we will use approach 2., the [config_short_run.yaml](config_short_run.yaml) contains an example config file that overwrites some of the SOMD2 defaults (note that some of the config parameters are default anyway, like `num_lambda: 11` for example):
+In this tutorial we will use approach 2., the [config_short_run.yaml](config_short_run.yaml) contains an example config file that overwrites some of the SOMD2 defaults (note that some of the config parameters are default anyway, like `pressure: 1 atm` for example):
 - `runtime: 500 ps` sets up a short simulation production time for testing.
 - `ghost_modifications: false` disables default ghost atom modifications (currently experimental).
 - `replica_exchange: true` enables a HREX simulation that will use all declared GPUs simultaneously.
