@@ -15,8 +15,8 @@ Use this table to find the exact tutorial or example system that matches the che
 * 🟡 **System Only** (Ready-to-run `.bss` file provided, no analysis scripts)
 * 🔴 **WIP** (Work in Progress)
 
-| Transformation Concept | Target System | Directory Path | Status
-| :--- | :--- | :--- |
+| Transformation Concept | Target System | Directory Path | Status |
+| :--- | :--- | :--- | :--- |
 | **Basic Charge-Change (Validation)** | Sodium (Na+ → Na°) | [`01-basics/sodium-in-a-box`](./01-basics/sodium-in-a-box) | 🟡
 | **Standard Ligand RBFE** | TYK2 | [`02-standard-rbfe/tyk2-ejm31-to-ejm50`](./02-standard-rbfe/tyk2-ejm31-to-ejm50) | 🟡
 | **Covalent RBFE** | hCatL | [`03-advanced-transformations/hCatL-covalent`](./03-advanced-transformations/hCatL-covalent) | 🟡
