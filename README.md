@@ -23,7 +23,7 @@ Use this table to find the exact tutorial or example system that matches the che
 | **Protein Sidechain Mutation** | MDM2 | [`03-advanced-transformations/mdm2-v14g-protein-mutation`](./03-advanced-transformations/mdm2-v14g-protein-mutation) | 🟡
 | **Scaffold Hopping (Ring-Break)** | CHK1 | [`03-advanced-transformations/chk1-ring-break-only`](./03-advanced-transformations/chk1-ring-break-only) | 🟡
 | **Charge-Changing Mutation** | MDM2 | [`04-case-studies/mdm2-e23g-mutation`](./04-case-studies/mdm2-e23g-mutation) | 🟢
-| **Proline Mutation** | OMTKY3 | [`04-case-studies/OMTKY3-proline-mutation`](./04-case-studies/OMTKY3-proline-mutation) | 🔴
+| **Proline Mutation** | OMTKY3 | [`04-case-studies/OMTKY3-proline-mutation`](./04-case-studies/OMTKY3-proline-mutation) | 🟢
 
 ---
 
@@ -47,3 +47,9 @@ Shows how to process the SOMD2 results generated in the simulation section.
 ## Dependencies
 
 Running these examples **requires the devlopment (`devel`) versions** of OpenBioSim software stack (see https://github.com/OpenBioSim/somd2#installation for details). Check individual tutorial `README` files for specific version requirements.
+
+> [!Caution]
+> If you are getting segmentation faults when running BioSimSpace free energy analysis code, this is most likely due to the `jax` library that was pulled in during the installation process. `jax` is a depedency of `PyMBAR` and `alchemlyb` which BioSimSpace uses to carry out MBAR analysis. In this case, downgrading the CPU-build of `jax` should resolve all problems:
+> ```bash
+> conda install "jaxlib=*=*cpu*" jax -c conda-forge --force-reinstall
+> ```
