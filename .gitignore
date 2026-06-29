@@ -1,0 +1,12 @@
+
+**/dynamics
+*.out
+.vscode/
+*.bss
+*.xml
+*.prm7
+*.parquet
+*.dcd
+*.txt
+*.pkl
+*.done

@@ -1,0 +1,1 @@
+Once the simulation from the previous part of the tutorial has finished, use the [analyse_somd2.ipynb](analyse_somd2.ipynb) notebook to analyse the free energy results.
